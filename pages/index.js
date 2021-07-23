@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Client } from "@notionhq/client";
+import { useState } from "react";
 
 import Head from "next/head";
 import Image from "next/image";
@@ -7,25 +6,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
 export default function Home({ results }) {
-  const getDatabaseDisplay = () => {
-    let jsx = [];
-    results.forEach((location, i) => {
-      jsx.push(
-        <div key={i} className={styles.card}>
-          <h2>{location.properties.name.title[0].plain_text}</h2>
-          <p>
-            meals -{" "}
-            {location.properties.meals.multi_select.map((meal) => meal.name)}
-          </p>
-          <p>
-            zones -{" "}
-            {location.properties.zones.multi_select.map((zone) => zone.name)}
-          </p>
-        </div>
-      );
-    });
-    return jsx;
-  };
+  const [showLocations, setShowLocations] = useState(false);
 
   return (
     <div className={styles.container}>
@@ -38,23 +19,32 @@ export default function Home({ results }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>{getDatabaseDisplay()}</main>
+      <main className={styles.main}>
+        <h1>eat what?</h1>
+        <p className={styles.description}>
+          a developer&apos;s attempt at addressing the daily struggle of
+          &apos;what are we going to eat today&apos;?
+        </p>
+
+        <h2>Locations</h2>
+        <p className={styles.description}>
+          still unsure about what to eat? browse our full list of noms.
+        </p>
+        <button onClick={() => setShowLocations(!showLocations)}>
+          {showLocations ? "hide" : "show"}
+        </button>
+        {showLocations && <div>opending implementation</div>}
+      </main>
+
+      <footer className={styles.footer}>
+        <span>
+          &copy; {new Date().getFullYear()} by{" "}
+          <a href="https://www.thuimin.com/" target="_blank" rel="noreferrer">
+            hmintoh
+          </a>
+          . made with 💛 in singapore.
+        </span>
+      </footer>
     </div>
   );
-}
-
-export async function getStaticProps() {
-  const notion = new Client({
-    auth: process.env.NOTION_API_KEY,
-  });
-
-  const res = await notion.databases.query({
-    database_id: process.env.NOTION_DATABASE_ID,
-  });
-
-  return {
-    props: {
-      results: res.results,
-    },
-  };
 }
