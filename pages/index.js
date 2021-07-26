@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Client } from "@notionhq/client";
 import Head from "next/head";
 import Image from "next/image";
-import { getLocations } from "./lib/notion";
+import { getLocations } from "../lib/notion.ts";
 
 import styles from "../styles/Home.module.css";
 
