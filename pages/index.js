@@ -1,12 +1,33 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { Client } from "@notionhq/client";
 import Head from "next/head";
 import Image from "next/image";
+import { getLocations } from "./lib/notion";
 
 import styles from "../styles/Home.module.css";
 
-export default function Home({ results }) {
+export default function Home({ locations }) {
   const [showLocations, setShowLocations] = useState(false);
+
+  const getDatabaseDisplay = () => {
+    let jsx = [];
+    locations.forEach((location, i) => {
+      jsx.push(
+        <div key={i} className={styles.card}>
+          <h2>{location.properties.name.title[0].plain_text}</h2>
+          <p>
+            meals -{" "}
+            {location.properties.meals.multi_select.map((meal) => meal.name)}
+          </p>
+          <p>
+            zones -{" "}
+            {location.properties.zones.multi_select.map((zone) => zone.name)}
+          </p>
+        </div>
+      );
+    });
+    return jsx;
+  };
 
   return (
     <div className={styles.container}>
@@ -33,7 +54,7 @@ export default function Home({ results }) {
         <button onClick={() => setShowLocations(!showLocations)}>
           {showLocations ? "hide" : "show"}
         </button>
-        {showLocations && <div>opending implementation</div>}
+        {showLocations && <div>{getDatabaseDisplay()}</div>}
       </main>
 
       <footer className={styles.footer}>
@@ -47,4 +68,12 @@ export default function Home({ results }) {
       </footer>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const locations = await getLocations();
+
+  return {
+    props: { locations: locations.data },
+  };
 }
