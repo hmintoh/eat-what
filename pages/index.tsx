@@ -3,6 +3,7 @@ import { getLocations } from "@/lib/notion";
 
 import Footer from "@/components/footer";
 import Locationlist from "@/components/location-list";
+import Randomiser from "@/components/randomiser";
 import styles from "@/styles/Home.module.css";
 
 interface HomeProps {
@@ -20,6 +21,7 @@ const Home = ({ locations }: HomeProps): JSX.Element => {
           a developer&apos;s attempt at addressing the daily struggle of
           &apos;what are we going to eat today&apos;?
         </p>
+        <Randomiser locations={locations} />
 
         <section>
           <h2>Locations</h2>
