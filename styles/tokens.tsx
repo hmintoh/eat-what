@@ -1,4 +1,4 @@
-export const font = {
+const font = {
   size: {
     s: "0.875rem",
     m: "1rem",
@@ -8,7 +8,7 @@ export const font = {
   },
 };
 
-export const spacing = {
+const spacing = {
   _1: "1px",
   _2: "2px",
   _4: "4px",
@@ -18,7 +18,7 @@ export const spacing = {
   _20: "20px",
 };
 
-export const theme = {
+const theme = {
   primary: { light: "lavenderblush", reg: "pink", dark: "deeppink" },
   accent: "blueviolet",
   secondary: {
@@ -26,3 +26,5 @@ export const theme = {
     reg: "mediumslateblue",
   },
 };
+
+export { font, spacing, theme };

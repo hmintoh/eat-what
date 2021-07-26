@@ -1,9 +1,10 @@
 import React from "react";
+
 import {
   CardContainer,
   CardTitle,
   PillContainer,
-} from "@/components/location-list/styles";
+} from "@/styles/location-list.styles";
 
 interface LocationListProps {
   locations: any[];

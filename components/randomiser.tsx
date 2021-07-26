@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { ResultsContainer } from "@/components/randomiser/styles";
+import { ResultsContainer } from "@/styles/randomiser.styles";
 
 interface RandomiserProps {
   locations: any[];
