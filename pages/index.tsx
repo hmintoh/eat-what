@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
-import { Client } from "@notionhq/client";
-import Head from "next/head";
-import Image from "next/image";
+import React, { useState } from "react";
 import { getLocations } from "../lib/notion.ts";
 
 import styles from "../styles/Home.module.css";
 
-export default function Home({ locations }) {
+interface HomeProps {
+  locations: any;
+}
+
+const Home = ({ locations }: HomeProps): JSX.Element => {
   const [showLocations, setShowLocations] = useState(false);
 
   const getDatabaseDisplay = () => {
@@ -31,15 +32,6 @@ export default function Home({ locations }) {
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Eat what?</title>
-        <meta
-          name="description"
-          content="A developer's attempt at addressing the daily struggle of 'what are we going to eat today?"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className={styles.main}>
         <h1>eat what?</h1>
         <p className={styles.description}>
@@ -63,17 +55,19 @@ export default function Home({ locations }) {
           <a href="https://www.thuimin.com/" target="_blank" rel="noreferrer">
             hmintoh
           </a>
-          . made with 💛 in singapore.
+          . made with ♡ in singapore.
         </span>
       </footer>
     </div>
   );
-}
+};
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   const locations = await getLocations();
 
   return {
     props: { locations: locations.data },
   };
-}
+};
+
+export default Home;
