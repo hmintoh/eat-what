@@ -4,7 +4,13 @@ import { getLocations } from "@/lib/notion";
 import Footer from "@/components/footer";
 import Locationlist from "@/components/location-list";
 import Randomiser from "@/components/randomiser";
-import styles from "@/styles/Home.module.css";
+
+import {
+  BodyWrapper,
+  MainWrapper,
+  Description,
+  Section,
+} from "@/styles/home.styles";
 
 interface HomeProps {
   locations: any;
@@ -14,31 +20,34 @@ const Home = ({ locations }: HomeProps): JSX.Element => {
   const [showLocations, setShowLocations] = useState(false);
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1>eat what?</h1>
-        <p className={styles.description}>
-          a developer&apos;s attempt at addressing the daily struggle of
-          &apos;what are we going to eat today&apos;?
-        </p>
-        <Randomiser locations={locations} />
+    <BodyWrapper>
+      <MainWrapper>
+        <Section>
+          <h1>eat what?</h1>
+          <Description>
+            a developer&apos;s attempt at addressing the daily struggle of
+            &apos;what are we going to eat today&apos;?
+          </Description>
 
-        <section>
+          <Randomiser locations={locations} />
+        </Section>
+
+        <Section>
           <h2>Locations</h2>
-          <p className={styles.description}>
+          <Description>
             still unsure about what to eat? browse our full list of noms.
-          </p>
+          </Description>
 
           <button onClick={() => setShowLocations(!showLocations)}>
             {showLocations ? "hide" : "show"}
           </button>
 
           {showLocations && <Locationlist locations={locations} />}
-        </section>
-      </main>
+        </Section>
+      </MainWrapper>
 
       <Footer />
-    </div>
+    </BodyWrapper>
   );
 };
 

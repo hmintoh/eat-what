@@ -1,5 +1,9 @@
 import React from "react";
-import styles from "@/components/location-list/styles.module.css";
+import {
+  CardContainer,
+  CardTitle,
+  PillContainer,
+} from "@/components/location-list/styles";
 
 interface LocationListProps {
   locations: any[];
@@ -9,17 +13,21 @@ const LocationList = ({ locations }: LocationListProps): JSX.Element => {
   return (
     <>
       {locations.map((location, i) => (
-        <div key={i} className={styles.card}>
-          <h2>{location.properties.name.title[0].plain_text}</h2>
-          <p>
-            meals -{" "}
-            {location.properties.meals.multi_select.map((meal) => meal.name)}
-          </p>
-          <p>
-            zones -{" "}
-            {location.properties.zones.multi_select.map((zone) => zone.name)}
-          </p>
-        </div>
+        <CardContainer key={i}>
+          <CardTitle>{location.properties.name.title[0].plain_text}</CardTitle>
+
+          <PillContainer>
+            {location.properties.meals.multi_select.map((meal, i) => (
+              <span key={i}>{meal.name}</span>
+            ))}
+          </PillContainer>
+
+          <PillContainer>
+            {location.properties.zones.multi_select.map((zone, i) => (
+              <span key={i}>{zone.name}</span>
+            ))}
+          </PillContainer>
+        </CardContainer>
       ))}
     </>
   );

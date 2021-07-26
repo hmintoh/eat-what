@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "@/components/footer/styles.module.css";
+import { FooterContainer } from "@/components/footer/styles";
 
 const Footer = () => {
   return (
-    <footer className={styles.footer}>
+    <FooterContainer>
       <span>
         &copy; {new Date().getFullYear()} by{" "}
         <a href="https://www.thuimin.com/" target="_blank" rel="noreferrer">
@@ -11,7 +11,7 @@ const Footer = () => {
         </a>
         . made with ♡ in singapore.
       </span>
-    </footer>
+    </FooterContainer>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import styles from "@/components/randomiser/styles.module.css";
+
+import { ResultsContainer } from "@/components/randomiser/styles";
 
 interface RandomiserProps {
   locations: any[];
@@ -20,7 +21,7 @@ const Randomiser = ({ locations }: RandomiserProps): JSX.Element => {
   return (
     <>
       <button onClick={() => handleClick()}>随便</button>
-      {random && <div className={styles.results}>{random}</div>}
+      {random && <ResultsContainer>{random}</ResultsContainer>}
     </>
   );
 };
