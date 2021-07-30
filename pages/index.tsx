@@ -4,6 +4,7 @@ import { getLocations } from "@/lib/notion";
 import Footer from "@/components/footer";
 import Locationlist from "@/components/location-list";
 import Randomiser from "@/components/randomiser";
+import Button from "@/components/button";
 
 import {
   BodyWrapper,
@@ -38,9 +39,9 @@ const Home = ({ locations }: HomeProps): JSX.Element => {
             still unsure about what to eat? browse our full list of noms.
           </Description>
 
-          <button onClick={() => setShowLocations(!showLocations)}>
+          <Button onClick={() => setShowLocations(!showLocations)}>
             {showLocations ? "hide" : "show"}
-          </button>
+          </Button>
 
           {showLocations && <Locationlist locations={locations} />}
         </Section>
