@@ -11,18 +11,29 @@ export const BodyWrapper = styled.div`
 `;
 
 export const MainWrapper = styled.main`
-  padding: 5rem 0;
+  padding: ${spacing._40} 0;
   margin: auto;
+
+  h1 {
+    font-size: ${font.size.xxl};
+  }
+
+  h2 {
+    font-size: ${font.size.xl};
+  }
 `;
 
 export const Description = styled.p`
   text-align: center;
-  line-height: 1.5;
   font-size: ${font.size.l};
+  font-weight: ${font.weight.semi};
 `;
 
 export const Section = styled.section`
   width: 100%;
   max-width: 800px;
-  padding: 0 ${spacing._16};
+  padding: ${spacing._20} ${spacing._16};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

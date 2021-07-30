@@ -7,7 +7,7 @@ export const CardContainer = styled.div`
   text-align: left;
   color: inherit;
   text-decoration: none;
-  border: ${spacing._1} solid ${theme.accent};
+  border: ${spacing._1} solid ${theme.secondary.light};
   border-radius: ${spacing._8};
   transition: color 0.15s ease, border-color 0.15s ease;
   line-height: 1.5;
@@ -31,7 +31,7 @@ export const PillContainer = styled.div`
   & > * {
     padding: ${spacing._2} ${spacing._8};
     border-radius: ${spacing._8};
-    border: ${spacing._1} solid ${theme.accent};
+    border: ${spacing._1} solid ${theme.secondary.light};
   }
 
   & > :not(:last-child) {

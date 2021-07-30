@@ -4,14 +4,14 @@ import { font, spacing, theme } from "@/styles/tokens";
 export const ButtonWrapper = styled.button`
   padding: ${spacing._16};
   border-radius: ${spacing._4};
-  background-color: ${theme.secondary.light};
-  border: 1px solid ${theme.secondary.reg};
-  font-size: inherit;
+  background-color: ${theme.primary.reg};
+  border: 2px solid ${theme.primary.reg};
+  font-size: ${font.size.m};
   min-width: 100px;
-  font-weight: bold;
+  font-weight: ${font.weight.semi};
 
-  button:hover {
+  &:hover {
     cursor: pointer;
-    background-color: ${theme.primary.light};
+    border: 2px solid ${theme.secondary.reg};
   }
 `;
