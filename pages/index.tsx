@@ -34,9 +34,10 @@ const Home = ({ locations }: HomeProps): JSX.Element => {
         </Section>
 
         <Section>
-          <h2>Locations</h2>
           <Description>
-            still unsure about what to eat? browse our full list of noms.
+            <em>
+              still unsure about what to eat? browse our full list of noms.
+            </em>
           </Description>
 
           <Button onClick={() => setShowLocations(!showLocations)}>

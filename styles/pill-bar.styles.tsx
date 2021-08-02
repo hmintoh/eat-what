@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { spacing, theme } from "@/styles/tokens";
 
 export const PillBarWrapper = styled.div`
-  padding: ${spacing._20} 0;
   display: flex;
+  padding-bottom: ${spacing._16};
 
   & > :not(:last-child) {
     margin-right: ${spacing._8};
