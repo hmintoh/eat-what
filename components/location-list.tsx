@@ -1,36 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import PillBar from "@/components/pill-bar";
 
 import {
-  CardContainer,
-  CardTitle,
-  PillContainer,
+  LocationListWrapper,
+  ListContainer,
 } from "@/styles/location-list.styles";
 
 interface LocationListProps {
   locations: any[];
 }
 
+type zones = "central" | "north" | "south" | "east" | "west";
+
 const LocationList = ({ locations }: LocationListProps): JSX.Element => {
+  const [activeZone, setActiveZone] = useState<zones | undefined>(undefined);
+  const [filteredLocations, setFilteredLocations] = useState<any[]>(locations);
+
+  useEffect(() => {
+    if (activeZone !== undefined) {
+      const filters = [];
+      activeZone !== undefined && filters.push(activeZone);
+      getFilteredLocations(filters);
+    }
+  }, [activeZone]);
+
+  const getFilteredLocations = (filters: string[]): void => {
+    const filtered = locations.filter((location) =>
+      location.properties.zones.multi_select.some((zone) =>
+        filters.includes(zone.name)
+      )
+    );
+    setFilteredLocations(filtered);
+  };
+
   return (
-    <>
-      {locations.map((location, i) => (
-        <CardContainer key={i}>
-          <CardTitle>{location.properties.name.title[0].plain_text}</CardTitle>
+    <LocationListWrapper>
+      <PillBar
+        labels={["central", "north", "south", "east", "west"]}
+        setActive={(label) => setActiveZone(label)}
+      />
 
-          <PillContainer>
-            {location.properties.meals.multi_select.map((meal, i) => (
-              <span key={i}>{meal.name}</span>
-            ))}
-          </PillContainer>
-
-          <PillContainer>
-            {location.properties.zones.multi_select.map((zone, i) => (
-              <span key={i}>{zone.name}</span>
-            ))}
-          </PillContainer>
-        </CardContainer>
-      ))}
-    </>
+      <ListContainer>
+        {filteredLocations.map((location, i) => (
+          <span key={i}>
+            {i + 1} - {location.properties.name.title[0].plain_text}
+          </span>
+        ))}
+      </ListContainer>
+    </LocationListWrapper>
   );
 };
 

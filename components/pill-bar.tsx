@@ -3,7 +3,7 @@ import { PillBarWrapper, Pill } from "@/styles/pill-bar.styles";
 
 interface PillBarProps {
   labels: string[];
-  setActive: (string) => void;
+  setActive: Function;
 }
 
 const PillBar = ({ labels, setActive }: PillBarProps): JSX.Element => {
