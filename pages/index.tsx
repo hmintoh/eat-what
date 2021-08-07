@@ -24,7 +24,7 @@ const Home = ({ locations }: HomeProps): JSX.Element => {
     <BodyWrapper>
       <MainWrapper>
         <Section>
-          <h1>eat what ah? 🤔</h1>
+          <h1>eat what? 🤔</h1>
           <Description>
             a developer&apos;s attempt at addressing the daily struggle of
             &apos;what are we going to eat today&apos;?
