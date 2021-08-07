@@ -23,7 +23,7 @@ export const MainWrapper = styled.main`
   }
 `;
 
-export const Description = styled.p`
+export const Description = styled.div`
   text-align: center;
   font-size: ${font.size.l};
   font-weight: ${font.weight.semi};
