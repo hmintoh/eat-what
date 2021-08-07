@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { TZones } from "@/utils/types";
 
 import PillBar from "@/components/pill-bar";
 
@@ -11,10 +12,8 @@ interface LocationListProps {
   locations: any[];
 }
 
-type zones = "central" | "north" | "south" | "east" | "west";
-
 const LocationList = ({ locations }: LocationListProps): JSX.Element => {
-  const [activeZone, setActiveZone] = useState<zones | undefined>(undefined);
+  const [activeZone, setActiveZone] = useState<TZones | undefined>(undefined);
   const [filteredLocations, setFilteredLocations] = useState<any[]>(locations);
 
   useEffect(() => {

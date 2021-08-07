@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getLocations } from "@/lib/notion";
+import { getLocations } from "@/utils/notion";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const locations = await getLocations();
