@@ -25,7 +25,7 @@ export const MainWrapper = styled.main`
 
 export const Description = styled.div`
   text-align: center;
-  font-size: ${font.size.l};
+  font-size: ${font.size.m};
   font-weight: ${font.weight.semi};
 `;
 

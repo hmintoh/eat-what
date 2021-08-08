@@ -4,7 +4,7 @@ import { font, spacing, theme } from "@/styles/tokens";
 export const ResultsContainer = styled.div`
   text-align: center;
   padding-top: ${spacing._40};
-  font-size: ${font.size.xxxl};
+  font-size: ${font.size.xxl};
   color: ${theme.primary.dark};
   line-height: 1.3;
 `;

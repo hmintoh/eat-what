@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getLocations } from "@/utils/notion";
 import { isWithinInterval, getTime } from "@/utils/date";
-import { TMeals } from "@/utils/types";
+import { TMeals, mealRange } from "@/utils/types";
 
 import Footer from "@/components/footer";
 import Locationlist from "@/components/location-list";
@@ -19,29 +19,6 @@ interface HomeProps {
   locations: any;
 }
 
-const meals = {
-  lateSupper: {
-    start: new Date().setHours(0, 0, 0),
-    end: new Date().setHours(2, 59, 59),
-  },
-  breakfast: {
-    start: new Date().setHours(6, 0, 0),
-    end: new Date().setHours(11, 59, 59),
-  },
-  lunch: {
-    start: new Date().setHours(11, 0, 0),
-    end: new Date().setHours(15, 59, 59),
-  },
-  dinner: {
-    start: new Date().setHours(16, 0, 0),
-    end: new Date().setHours(21, 29, 59),
-  },
-  earlySupper: {
-    start: new Date().setHours(21, 30, 0),
-    end: new Date().setHours(23, 59, 59),
-  },
-};
-
 const Home = ({ locations }: HomeProps): JSX.Element => {
   const [showLocations, setShowLocations] = useState(false);
   const [mealtime, setMealtime] = useState<TMeals[]>([]);
@@ -55,14 +32,14 @@ const Home = ({ locations }: HomeProps): JSX.Element => {
     const now = getTime();
     const meal = [];
 
-    isWithinInterval(now, meals.breakfast) && meal.push("breakfast");
+    isWithinInterval(now, mealRange.breakfast) && meal.push("breakfast");
 
-    isWithinInterval(now, meals.lunch) && meal.push("lunch");
+    isWithinInterval(now, mealRange.lunch) && meal.push("lunch");
 
-    isWithinInterval(now, meals.dinner) && meal.push("dinner");
+    isWithinInterval(now, mealRange.dinner) && meal.push("dinner");
 
-    (isWithinInterval(now, meals.earlySupper) ||
-      isWithinInterval(now, meals.lateSupper)) &&
+    (isWithinInterval(now, mealRange.earlySupper) ||
+      isWithinInterval(now, mealRange.lateSupper)) &&
       meal.push("supper");
 
     setMealtime(meal);
@@ -70,8 +47,11 @@ const Home = ({ locations }: HomeProps): JSX.Element => {
   };
 
   const getTimeSensitiveLocations = () => {
-    console.log("hi");
-    return;
+    return locations.filter((location) =>
+      location.properties.meals.multi_select.some((meal) =>
+        mealtime.includes(meal.name)
+      )
+    );
   };
 
   return (
@@ -87,30 +67,28 @@ const Home = ({ locations }: HomeProps): JSX.Element => {
 
             {mealtime.length === 0 ? (
               <p>
-                its {new Date().getHours()}:{new Date().getMinutes()} 😴
+                it&apos;s {new Date().getHours()}:{new Date().getMinutes()} 😴
               </p>
             ) : (
               <p>
-                its <em>{mealtime.join("/")}</em> time!
+                it&apos;s <em>{mealtime.join("/")}</em> time!
               </p>
             )}
           </Description>
 
-          <Randomiser locations={locations} />
+          <Randomiser locations={getTimeSensitiveLocations()} />
         </Section>
 
         <Section>
-          <Description>
-            <em>
-              still unsure about what to eat? browse our full list of noms.
-            </em>
-          </Description>
+          <p>still unsure about what to eat? browse our full list of noms.</p>
 
           <Button onClick={() => setShowLocations(!showLocations)}>
             {showLocations ? "hide" : "show"}
           </Button>
 
-          {showLocations && <Locationlist locations={locations} />}
+          {showLocations && (
+            <Locationlist locations={getTimeSensitiveLocations()} />
+          )}
         </Section>
       </MainWrapper>
 
