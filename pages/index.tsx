@@ -97,7 +97,7 @@ const Home = ({ locations }: HomeProps): JSX.Element => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const locations = await getLocations();
 
   return {
